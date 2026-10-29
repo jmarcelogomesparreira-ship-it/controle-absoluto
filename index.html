@@ -101,12 +101,8 @@ h2{font-size:clamp(30px,4.4vw,46px);font-weight:700;max-width:18ch}
 .phone .ui-row span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .phone .ui-kpis{grid-template-columns:1fr}
 .phone .ui-bars{height:46px}
-.replay{position:absolute;left:0;bottom:-6px;font:600 13px var(--body);color:var(--muted);background:none;border:0;cursor:pointer;display:flex;gap:6px;align-items:center;opacity:0;transition:opacity .4s ease 2.6s}
-.stage.go .replay{opacity:1}
-.stage.reset *{transition:none!important}
+.stage.go .stage.reset *{transition:none!important}
 .stage.fade .laptop,.stage.fade .phone{opacity:0;transition:opacity .6s ease!important}
-.replay:hover{color:var(--ink)}
-.replay svg{width:15px;height:15px}
 
 /* ---------- sections ---------- */
 section{padding:96px 0}
@@ -297,16 +293,10 @@ footer{padding:26px 0;font-size:14px;color:var(--muted);text-align:center}
             <div class="ui-kpi"><em>Estouro do mês</em><strong class="c">+R$ 6,1 mil</strong></div>
           </div>
           <div class="ui-card"><div class="ui-bars" data-bars></div></div>
-          <div class="ui-card" style="margin-top:6px">
-            <div class="ui-row"><span>Manutenção</span><span>+48%</span></div>
-            <div class="ui-row"><span>Marketing</span><span>+40%</span></div>
-            <div class="ui-row"><span>Energia</span><span>+17%</span></div>
-          </div>
         </div>
       </div>
     </div>
 
-    <button class="replay" id="replay" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Ver de novo</button>
   </div>
 </div>
 
@@ -462,12 +452,11 @@ footer{padding:26px 0;font-size:14px;color:var(--muted);text-align:center}
     later(function(){stage.classList.add('go')},400);
     later(function(){growBars(true)},1600);
     if(!reduce){
-      later(function(){stage.classList.add('fade')},7600);
-      later(start,8300);
+      later(function(){stage.classList.add('fade')},5400);
+      later(start,6000);
     }
   }
   function play(){timers.forEach(clearTimeout);timers=[];start()}
-  document.getElementById('replay').onclick=play;
   if(reduce){stage.classList.add('go');growBars(true)}else{play()}
   document.addEventListener('visibilitychange',function(){if(!document.hidden&&!reduce)play()});
 
