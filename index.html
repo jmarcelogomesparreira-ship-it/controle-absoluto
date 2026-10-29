@@ -335,6 +335,87 @@ section.tight{padding-top:0}
   .phone{width:30%}
   .phone .ui-kpi strong{font-size:10px}
 }
+
+/* ---------- vitrine de painéis ---------- */
+.folio{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.folio-head h2{max-width:20ch}
+.segs{display:flex;gap:10px;margin-top:32px;overflow-x:auto;scrollbar-width:none;padding:2px 2px 6px;margin-left:-2px;margin-right:-2px;scroll-snap-type:x proximity}
+.segs::-webkit-scrollbar{display:none}
+.segb{flex:0 0 auto;display:flex;align-items:center;gap:10px;min-height:56px;padding:10px 18px 10px 12px;border-radius:16px;border:1.5px solid var(--line-2);background:var(--paper);font:600 15.5px var(--body);color:var(--ink-2);cursor:pointer;scroll-snap-align:start;transition:border-color .2s,background .2s,color .2s}
+.segb:hover{border-color:var(--ink)}
+.segb .si{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:var(--white);color:var(--emerald-2);transition:background .2s,color .2s}
+.segb .si svg{width:20px;height:20px}
+.segb[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.segb[aria-selected="true"] .si{background:rgba(255,255,255,.12);color:#5FD3A6}
+.soon-line{margin-top:10px;font-size:14px;color:var(--muted)}
+
+.show{margin-top:28px;display:grid;grid-template-columns:1fr 1.15fr;gap:48px;align-items:center}
+.show[hidden]{display:none}
+.show-info{min-width:0}
+.show-info .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--emerald-2)}
+.show-info .eyebrow i{font-style:normal;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted);background:var(--paper);padding:3px 10px;border-radius:999px}
+.show-info h3{font-size:clamp(27px,3.2vw,38px);margin-top:10px;max-width:18ch}
+.show-info .lead{color:var(--ink-2);margin-top:12px;max-width:52ch}
+.feats{list-style:none;display:grid;gap:10px;margin-top:20px}
+.feats li{display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start;font-size:16px}
+.feats li span{width:30px;height:30px;border-radius:9px;background:var(--emerald-soft);color:var(--emerald-2);display:grid;place-items:center}
+.feats li svg{width:17px;height:17px}
+.feats li b{font-weight:700}
+.wow{margin-top:22px;border-radius:18px;padding:18px 20px;background:var(--ink);color:#fff;display:grid;gap:4px}
+.wow small{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#B9C3D0}
+.wow b{font-family:var(--display);font-size:24px;letter-spacing:-.02em;color:#5FD3A6}
+.wow p{color:#C9D2DD;font-size:15px}
+.uses{margin-top:16px;font-size:14.5px;color:var(--muted)}
+.uses b{color:var(--ink-2)}
+.show-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.show-info.swap{animation:swap .45s ease}
+@keyframes swap{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.show-dev{display:flex;flex-direction:column;align-items:center;min-width:0}
+.device{position:relative;display:block;width:100%;border:0;background:none;padding:0;cursor:pointer;text-align:left}
+.dev-frame{display:block;position:relative;background:var(--ink);border-radius:18px 18px 6px 6px;padding:12px;box-shadow:0 40px 70px -40px rgba(15,26,43,.55)}
+.dev-notch{display:none}
+.dev-screen{display:block;position:relative;overflow:hidden;border-radius:8px;background:var(--paper);aspect-ratio:16/10}
+.dev-screen iframe{position:absolute;left:0;top:0;width:1280px;height:800px;border:0;transform-origin:0 0;pointer-events:none;opacity:0;transition:opacity .4s ease}
+.dev-screen iframe.on{opacity:1}
+.dev-base{display:block;height:16px;margin:0 -5%;background:linear-gradient(#cdd5de,#aeb8c4);border-radius:0 0 16px 16px}
+.dev-base::after{content:"";display:block;width:16%;height:6px;margin:0 auto;background:#9aa5b2;border-radius:0 0 7px 7px}
+.dev-skel{position:absolute;inset:0;padding:6% 5%;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto 1fr;gap:10px}
+.dev-skel i{border-radius:10px;background:linear-gradient(90deg,#E8EDF4,#F4F6F8,#E8EDF4);background-size:200% 100%;animation:sk 1.2s linear infinite;height:60px}
+.dev-skel i:nth-child(4){grid-column:1/-1;height:auto}
+@keyframes sk{to{background-position:-200% 0}}
+.dev-tap{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);display:inline-flex;white-space:nowrap;align-items:center;gap:8px;background:rgba(15,26,43,.9);color:#fff;font:600 14.5px var(--body);padding:10px 16px;border-radius:999px;box-shadow:0 10px 24px -10px rgba(15,26,43,.6);pointer-events:none;transition:transform .2s}
+.dev-tap svg{width:18px;height:18px;color:#5FD3A6}
+.device:hover .dev-tap{transform:translateX(-50%) scale(1.05)}
+.dev-cap{margin-top:16px;display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);min-height:22px}
+.dev-cap b{color:var(--ink)}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald);box-shadow:0 0 0 0 rgba(14,138,99,.5);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(14,138,99,0)}100%{box-shadow:0 0 0 0 rgba(14,138,99,0)}}
+
+/* celular: o aparelho vira um telefone */
+.device.phone-mode{width:280px}
+.device.phone-mode .dev-frame{border-radius:38px;padding:10px}
+.device.phone-mode .dev-notch{display:block;position:absolute;top:16px;left:50%;transform:translateX(-50%);width:84px;height:20px;border-radius:12px;background:var(--ink);z-index:2}
+.device.phone-mode .dev-screen{border-radius:28px;aspect-ratio:390/780}
+.device.phone-mode .dev-screen iframe{width:390px;height:780px}
+.device.phone-mode .dev-base{display:none}
+.device.phone-mode .dev-skel{grid-template-columns:1fr 1fr;padding:46px 12px 12px}
+
+.ind{margin-top:28px}
+.ind[hidden]{display:none}
+.ind-intro h3{font-size:clamp(24px,2.6vw,30px)}
+.ind-intro p{color:var(--ink-2);margin-top:6px}
+.ind .folio-grid{margin-top:22px}
+
+@media (max-width:900px){
+  .show{grid-template-columns:1fr;gap:28px}
+  .show-dev{order:-1}
+}
+@media (max-width:480px){
+  .show-ctas .btn{width:100%}
+  .segb{min-height:52px;padding:8px 14px 8px 10px;font-size:15px}
+}
+@media (prefers-reduced-motion:reduce){.live-dot,.dev-skel i{animation:none}}
 </style>
 </head>
 <body>
@@ -472,6 +553,41 @@ section.tight{padding-top:0}
   </div>
 </section>
 
+<section id="portfolio" class="folio">
+  <div class="wrap">
+    <div class="rv folio-head">
+      <h2>Um painel para cada tipo de negócio</h2>
+      <p class="sub">Escolha o seu segmento e veja o painel rodando de verdade, com números fictícios. Toque na tela para usar à vontade.</p>
+    </div>
+
+    <div class="segs rv" id="segs" role="tablist" aria-label="Escolher segmento"></div>
+    <p class="soon-line rv">Em breve: padaria e consultório médico.</p>
+
+    <div class="show rv" id="show">
+      <div class="show-info" id="showInfo" aria-live="polite"></div>
+      <div class="show-dev">
+        <button type="button" class="device" id="device" aria-label="Abrir o painel para usar">
+          <span class="dev-frame" id="devFrame">
+            <span class="dev-notch" aria-hidden="true"></span>
+            <span class="dev-screen" id="devScreen">
+              <span class="dev-skel" id="devSkel" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <iframe id="devFrameEl" title="Prévia do painel" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
+            </span>
+          </span>
+          <span class="dev-base" aria-hidden="true"></span>
+          <span class="dev-tap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V5a2 2 0 1 1 4 0v5"/><path d="M13 10a2 2 0 1 1 4 0v2"/><path d="M17 12a2 2 0 1 1 4 0v3a7 7 0 0 1-7 7h-1a7 7 0 0 1-6-3.4L4.5 15a2 2 0 0 1 3.4-2l1.1 1.6"/></svg>Toque para usar</span>
+        </button>
+        <p class="dev-cap"><span class="live-dot" aria-hidden="true"></span><span id="devCap">Ao vivo</span></p>
+      </div>
+    </div>
+
+    <div class="ind rv" id="ind" hidden>
+      <div class="ind-intro"><h3>Para usinas e indústrias</h3><p>Sistemas maiores, pensados por área da operação. Toque em um para abrir.</p></div>
+      <div class="folio-grid" id="folio"></div>
+    </div>
+  </div>
+</section>
+
 <section class="case">
   <div class="wrap case-grid">
     <div class="rv">
@@ -514,15 +630,6 @@ section.tight{padding-top:0}
   </div>
 </section>
 
-<section id="portfolio" class="folio">
-  <div class="wrap">
-    <div class="rv">
-      <h2>Outros sistemas que eu construo</h2>
-      <p class="sub">Painéis completos para a indústria, cada um pensado para uma área. Toque em um para abrir e usar aqui mesmo.</p>
-    </div>
-    <div class="folio-grid rv" id="folio"></div>
-  </div>
-</section>
 
 <section class="about-sec">
   <div class="wrap about rv">
@@ -774,9 +881,55 @@ section.tight{padding-top:0}
     so.observe(heroEl);so.observe(ctaEl);
   }
 
-  /* ---------- portfólio ----------
-     Pra colocar um sistema no ar, cole o link do GitHub Pages em "url".
-     Com "url" vazio, o card aparece como "Em breve". */
+  /* ---------- vitrine de painéis por segmento ----------
+     Para colocar um painel novo: copie um bloco de SEGMENTOS, troque o nome do arquivo em "url"
+     e os textos. "tour" são as telas que a prévia mostra sozinha (o nome da aba e a legenda). */
+  var BASE_URL='https://jmarcelogomesparreira-ship-it.github.io/controle-absoluto/';
+  var I={
+    calc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M8 6.5h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h3.5"/></svg>',
+    cow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20c2.5-5 5.5-7.5 9-7.5s6.5 2.5 9 7.5"/><path d="M2 20h20"/><circle cx="17.5" cy="6.5" r="2.5"/></svg>',
+    paw:'<svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="16" rx="4.6" ry="3.8"/><circle cx="6.2" cy="10.6" r="2"/><circle cx="9.8" cy="7" r="2"/><circle cx="14.2" cy="7" r="2"/><circle cx="17.8" cy="10.6" r="2"/></svg>',
+    cart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 11h10.2L20 7H7"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>',
+    factory:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l6 3V10l6 3V6l6-2v17z"/><path d="M7 17h2M12 17h2M17 17h1"/></svg>',
+    ok:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+    open:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>',
+    wa:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>'
+  };
+  var SEGMENTOS=[
+    {k:'contab',nome:'Contabilidade',titulo:'Painel do Escritório de Contabilidade',ico:'calc',url:'contabilidade.html',telas:7,
+     gancho:'Quais clientes custam mais do que pagam?',
+     lead:'Para o dono do escritório: honorários, inadimplência, todos os prazos do mês por cliente, a carga de cada colaborador e a rentabilidade de cada cliente.',
+     feats:['<b>Honorários e inadimplência</b> por idade do atraso','<b>Calendário de obrigações</b>: DAS, DCTFWeb, eSocial, FGTS e folha, por cliente e responsável','<b>Produtividade</b>: quem está sobrecarregado e quem tem folga','<b>Documentos pendentes</b> dos clientes, com quem sempre atrasa'],
+     wow:['Rentabilidade por cliente','O painel cruza o honorário com as horas da equipe e mostra quem dá prejuízo e quanto reajustar.'],
+     usa:'sistema contábil e fiscal, controle de honorários e horas da equipe',
+     msg:'Olá, Marcelo! Vi o painel de contabilidade no site e quero no meu escritório.',
+     tour:[['geral','Visão geral'],['rent','Rentabilidade por cliente'],['obr','Obrigações e prazos'],['hon','Honorários e inadimplência'],['prod','Produtividade da equipe']]},
+    {k:'pec',nome:'Pecuária',titulo:'Painel da Pecuária de Corte',ico:'cow',url:'pecuaria.html',telas:9,
+     gancho:'Estou ganhando dinheiro com o gado?',
+     lead:'Para o pecuarista que hoje controla no caderno: rebanho que fecha mês a mês, ganho de peso por lote, pasto, custos e o quanto sobra em cada venda.',
+     feats:['<b>Rebanho que fecha</b>: nascimentos, compras, vendas e mortes','<b>Ganho de peso por lote</b> e previsão de abate','<b>Pasto</b>: lotação de cada piquete e quem passou do limite','<b>Calendário sanitário</b> e livro caixa pronto para o contador'],
+     wow:['Simulador de venda','Mude o preço da arroba e veja na hora quanto sobra no bolso se vender o lote hoje.'],
+     usa:'caderno ou planilha de campo, notas de compra e venda, pesagens',
+     msg:'Olá, Marcelo! Vi o painel da pecuária no site e quero na minha fazenda.',
+     tour:[['geral','Visão geral'],['vendas','Simulador de venda'],['lotes','Ganho de peso por lote'],['pasto','Lotação do pasto'],['rebanho','Rebanho do mês']]},
+    {k:'vet',nome:'Clínica veterinária',titulo:'Painel da Clínica Veterinária',ico:'paw',url:'veterinaria.html',telas:9,
+     gancho:'Quanto cada serviço me dá de lucro?',
+     lead:'Para o veterinário dono de clínica: atendimentos, lucro por serviço, pacientes que precisam voltar, agenda, estoque de vacinas e o pet shop.',
+     feats:['<b>Retorno de pacientes</b>: vacinas vencendo e lembretes prontos por WhatsApp','<b>Agenda</b>: ocupação de cada veterinário, faltas e internação','<b>Estoque</b> que baixa a cada atendimento, com validade','<b>Contas</b>: boletos em atraso e o que vence em 30 dias'],
+     wow:['Lucro por hora de trabalho','Cirurgia, vacina, banho e tosa, atendimento na fazenda: o painel mostra o que dá dinheiro e o que só dá trabalho.'],
+     usa:'sistema da clínica ou agenda, relatório das maquininhas, notas de compra',
+     msg:'Olá, Marcelo! Vi o painel da clínica veterinária no site e quero na minha clínica.',
+     tour:[['geral','Visão geral'],['lucro','Lucro por serviço'],['retorno','Retorno de pacientes'],['agenda','Agenda e ocupação'],['estoque','Estoque e validade']]},
+    {k:'merc',nome:'Mercado',titulo:'Painel do Mercado',ico:'cart',url:'mercado.html',telas:10,
+     gancho:'Vendo muito e não sobra nada. Por quê?',
+     lead:'Para o dono de mercado: vendas por hora, margem de cada seção, curva ABC, validade, taxas das maquininhas, compras e caixas.',
+     feats:['<b>Margem por seção</b> e o simulador de promoção','<b>Curva ABC e ruptura</b>: o que zerou e quanto se deixou de vender','<b>Validade</b>: o que vence e o que fazer antes de virar perda','<b>Caixas</b>: cancelamentos e diferença de cada operador'],
+     wow:['Perdas: quanto vai para o lixo','Vencimento, quebra, furto e hortifrúti estragado. No exemplo, o mercado jogou fora mais do que lucrou.'],
+     usa:'relatório do PDV (frente de caixa), notas de compra e inventário',
+     msg:'Olá, Marcelo! Vi o painel do mercado no site e quero no meu mercado.',
+     tour:[['geral','Visão geral'],['perdas','Perdas e quebras'],['margem','Margem por seção'],['abc','Curva ABC e ruptura'],['vendas','Horários de pico']]},
+    {k:'ind',nome:'Indústria e usina',ico:'factory'}
+  ];
   var PORTFOLIO=[
     {titulo:'Centro de Operações Agrícolas',area:'Agrícola',url:'',
      texto:'Sala de controle da safra: colheita, frota, manutenção, solo, insumos, clima e custos em uma tela.',thumb:'agro'},
@@ -794,6 +947,7 @@ section.tight{padding-top:0}
     frota:'<rect width="400" height="200" fill="#0F1A2B"/><path d="M30 160 C110 40 180 170 250 80 S360 60 380 40" fill="none" stroke="#1E2C43" stroke-width="14" stroke-linecap="round"/><path d="M30 160 C110 40 180 170 250 80" fill="none" stroke="#5FD3A6" stroke-width="6" stroke-linecap="round" stroke-dasharray="4 12"/><circle cx="250" cy="80" r="11" fill="#fff"/><circle cx="250" cy="80" r="22" fill="#fff" opacity=".18"/>'
   };
   var arrow='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  var arrow='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
   var folio=document.getElementById('folio');
   folio.innerHTML=PORTFOLIO.map(function(p,i){
     var on=!!p.url;
@@ -809,10 +963,71 @@ section.tight{padding-top:0}
     document.getElementById('mTitle').textContent=p.titulo;
     document.getElementById('mOpen').href=p.url;
     frame.src=p.url;modal.hidden=false;document.body.style.overflow='hidden';
+    pauseTour();
     document.getElementById('mClose').focus();
   }
-  function closeModal(){modal.hidden=true;frame.src='about:blank';document.body.style.overflow='';if(lastFocus)lastFocus.focus()}
+  function closeModal(){modal.hidden=true;frame.src='about:blank';document.body.style.overflow='';if(lastFocus)lastFocus.focus();resumeTour()}
   folio.onclick=function(e){var c=e.target.closest('.fcard');if(!c||c.disabled)return;openModal(PORTFOLIO[+c.dataset.i])};
+
+  /* abas dos segmentos */
+  var segsEl=document.getElementById('segs'),showEl=document.getElementById('show'),indEl=document.getElementById('ind'),info=document.getElementById('showInfo');
+  var devBox=document.getElementById('device'),dFrame=document.getElementById('devFrameEl'),dScreen=document.getElementById('devScreen'),dSkel=document.getElementById('devSkel'),dCap=document.getElementById('devCap');
+  var cur=0,shown=false,visible=false,tourT=null,tourI=0,tourWin=null;
+  function urlOf(sg){return sg.url}
+  segsEl.innerHTML=SEGMENTOS.map(function(sg,i){return '<button type="button" role="tab" class="segb" aria-selected="'+(i===cur)+'" data-i="'+i+'"><span class="si">'+I[sg.ico]+'</span>'+sg.nome+'</button>'}).join('');
+  segsEl.onclick=function(e){var b=e.target.closest('.segb');if(!b)return;pick(+b.dataset.i,true)};
+  function pick(i,user){
+    cur=i;segsEl.querySelectorAll('.segb').forEach(function(b,k){b.setAttribute('aria-selected',k===i)});
+    var sg=SEGMENTOS[i];
+    if(sg.k==='ind'){showEl.hidden=true;indEl.hidden=false;stopTour();dFrame.removeAttribute('src');dFrame.classList.remove('on');return}
+    indEl.hidden=true;showEl.hidden=false;
+    info.innerHTML='<span class="eyebrow">'+sg.nome+'<i>'+sg.telas+' telas</i></span><h3>'+sg.gancho+'</h3><p class="lead">'+sg.lead+'</p>'+
+      '<ul class="feats">'+sg.feats.map(function(f){return '<li><span>'+I.ok+'</span><div>'+f+'</div></li>'}).join('')+'</ul>'+
+      '<div class="wow"><small>O que mais impressiona</small><b>'+sg.wow[0]+'</b><p>'+sg.wow[1]+'</p></div>'+
+      '<p class="uses">Usa o que você já tem: <b>'+sg.usa+'</b>.</p>'+
+      '<div class="show-ctas"><button type="button" class="btn btn-dark" id="openSeg">'+I.open+'Abrir o painel</button><a class="btn btn-wa" id="waSeg" href="#" target="_blank" rel="noopener">'+I.wa+'Quero um assim</a></div>';
+    info.classList.remove('swap');void info.offsetWidth;info.classList.add('swap');
+    var wa=document.getElementById('waSeg');wa.href='https://wa.me/'+WA_NUMERO+'?text='+encodeURIComponent(sg.msg);
+    wa.addEventListener('click',function(){try{if(window.fbq)fbq('track','Contact',{content_name:'vitrine-'+sg.k})}catch(e){}});
+    document.getElementById('openSeg').onclick=function(){openModal({titulo:sg.titulo,url:urlOf(sg)})};
+    if(shown)loadPreview();
+    if(user&&window.innerWidth<900){var y=showEl.getBoundingClientRect().top+window.scrollY-12;if(Math.abs(window.scrollY-y)>200)window.scrollTo({top:y,behavior:reduce?'auto':'smooth'})}
+  }
+  devBox.onclick=function(){var sg=SEGMENTOS[cur];if(sg.url)openModal({titulo:sg.titulo,url:urlOf(sg)})};
+
+  /* prévia: celular no telefone, computador no notebook */
+  function phone(){return window.innerWidth<700}
+  function fit(){
+    devBox.classList.toggle('phone-mode',phone());
+    var w=dScreen.clientWidth,base=phone()?390:1280;
+    dFrame.style.transform='scale('+(w/base)+')';
+  }
+  function loadPreview(){
+    stopTour();var sg=SEGMENTOS[cur];if(!sg.url)return;
+    fit();dFrame.classList.remove('on');dSkel.style.display='';dCap.textContent='Carregando o painel…';
+    dFrame.onload=function(){dSkel.style.display='none';dFrame.classList.add('on');startTour()};
+    dFrame.src=urlOf(sg);
+  }
+  /* tour automático: a prévia passa sozinha pelas telas principais */
+  function startTour(){
+    stopTour();var sg=SEGMENTOS[cur];
+    try{tourWin=dFrame.contentWindow;if(!tourWin||!tourWin.__demo)throw 0}catch(e){tourWin=null;dCap.innerHTML='<b>'+sg.titulo+'</b>';return}
+    tourI=0;step();if(!reduce)tourT=setInterval(step,4500);
+  }
+  function step(){
+    var sg=SEGMENTOS[cur];if(!tourWin||!sg.tour)return;var t=sg.tour[tourI%sg.tour.length];tourI++;
+    try{tourWin.__demo.go(t[0]);tourWin.scrollTo(0,0);if(!reduce)setTimeout(function(){try{tourWin.scrollTo({top:phone()?240:160,behavior:'smooth'})}catch(e){}},1600)}catch(e){}
+    dCap.innerHTML='Ao vivo: <b>'+t[1]+'</b>';
+  }
+  function stopTour(){if(tourT){clearInterval(tourT);tourT=null}}
+  function pauseTour(){stopTour()}
+  function resumeTour(){if(visible&&tourWin&&!reduce&&!tourT&&SEGMENTOS[cur].url)tourT=setInterval(step,4500)}
+  var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(fit,120)});
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){visible=e.isIntersecting;if(visible&&!shown){shown=true;loadPreview()}else if(visible)resumeTour();else stopTour()})},{threshold:.2}).observe(showEl);
+  }else{shown=true;visible=true;loadPreview()}
+  document.addEventListener('visibilitychange',function(){if(document.hidden)stopTour();else resumeTour()});
+  pick(0,false);
   document.getElementById('mClose').onclick=closeModal;
   modal.addEventListener('click',function(e){if(e.target===modal)closeModal()});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)closeModal()});
