@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Controle Absoluto | Painel Orçado x Realizado</title>
+<meta name="description" content="Junte as planilhas de cada área em um painel só. Veja o que estourou, quanto e por quê, no computador ou no celular.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F6F8; --white:#FFFFFF; --ink:#0F1A2B; --ink-2:#3B4757; --muted:#6B7684;
+  --line:#E2E7ED; --line-2:#D3DAE2; --emerald:#0E8A63; --emerald-2:#0B6E4F; --emerald-soft:#E3F3EC;
+  --coral:#D9482F; --coral-soft:#FBE9E5; --sheet:#1F7A45; --navy-soft:#E8EDF4;
+  --display:"Bricolage Grotesque",system-ui,sans-serif; --body:Figtree,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--emerald);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.025em;line-height:1.08}
+h2{font-size:clamp(30px,4.4vw,46px);font-weight:700;max-width:18ch}
+.sub{color:var(--ink-2);max-width:58ch;margin-top:14px;font-size:18px}
+
+/* ---------- nav ---------- */
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:19px;text-decoration:none;letter-spacing:-.02em}
+.brand svg{width:28px;height:28px}
+.nav-links{display:flex;gap:28px;align-items:center;font-weight:600;font-size:15px}
+.nav-links a{text-decoration:none;color:var(--ink-2)}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.btn-dark{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font:600 16px var(--body);text-decoration:none;padding:14px 22px;border-radius:999px;border:1.5px solid transparent;cursor:pointer;transition:background .2s,transform .2s}
+.btn:active{transform:scale(.98)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:#1e2c43}
+.btn-line{border-color:var(--line-2);background:var(--white);color:var(--ink)}
+.btn-line:hover{border-color:var(--ink)}
+.btn svg{width:19px;height:19px}
+.btn-sm{padding:10px 16px;font-size:14.5px}
+
+/* ---------- hero ---------- */
+.hero{padding:40px 20px 30px;display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(42px,6.4vw,78px);font-weight:800;max-width:11ch}
+.hero .sub{font-size:clamp(18px,1.6vw,20px)}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.proof{display:flex;gap:28px;margin-top:38px;flex-wrap:wrap}
+.proof div{font-size:14.5px;color:var(--muted);max-width:16ch;line-height:1.35}
+.proof b{display:block;font-family:var(--display);font-size:28px;color:var(--ink);letter-spacing:-.02em;margin-bottom:2px}
+
+/* stage: sheets -> dashboard -> devices */
+.stage{position:relative;aspect-ratio:1.12/1;width:100%}
+.sheet{position:absolute;width:42%;background:var(--white);border:1px solid var(--line-2);border-radius:10px;box-shadow:0 18px 40px -18px rgba(15,26,43,.35);overflow:hidden;transition:transform 1.1s cubic-bezier(.7,0,.2,1),opacity .6s ease .7s}
+.sheet-top{display:flex;align-items:center;gap:7px;padding:8px 10px;background:var(--sheet);color:#fff;font-size:12px;font-weight:600}
+.sheet-top i{width:14px;height:14px;border-radius:3px;background:rgba(255,255,255,.9);display:inline-block}
+.cells{display:grid;grid-template-columns:1.6fr 1fr 1fr;font-size:10.5px;color:var(--ink-2)}
+.cells span{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:4px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cells span.h{background:var(--navy-soft);font-weight:700;color:var(--ink)}
+.cells span.r{text-align:right;font-variant-numeric:tabular-nums}
+.s1{left:0;top:6%;transform:rotate(-7deg)}
+.s2{left:30%;top:0;transform:rotate(3deg)}
+.s3{left:56%;top:12%;transform:rotate(9deg)}
+.stage.go .s1,.stage.go .s2,.stage.go .s3{transform:translate(var(--tx),var(--ty)) scale(.35) rotate(0);opacity:0}
+.s1{--tx:60%;--ty:55%} .s2{--tx:0%;--ty:70%} .s3{--tx:-60%;--ty:50%}
+
+.laptop{position:absolute;left:0;right:9%;top:6%;opacity:0;transform:scale(.92) translateY(14px);transition:opacity .7s ease 1.05s,transform .9s cubic-bezier(.2,.8,.2,1) 1.05s}
+.stage.go .laptop{opacity:1;transform:none}
+.screen{background:var(--ink);border-radius:14px 14px 4px 4px;padding:9px}
+.base{height:14px;margin:0 -5%;background:linear-gradient(#cdd5de,#aeb8c4);border-radius:0 0 14px 14px}
+.base::after{content:"";display:block;width:16%;height:5px;margin:0 auto;background:#9aa5b2;border-radius:0 0 6px 6px}
+.phone{position:absolute;right:0;bottom:0;width:23%;opacity:0;transform:translateY(40px);transition:opacity .6s ease 1.9s,transform .9s cubic-bezier(.2,.8,.2,1) 1.9s}
+.stage.go .phone{opacity:1;transform:none}
+.phone-body{background:var(--ink);border-radius:22px;padding:7px;box-shadow:0 26px 50px -20px rgba(15,26,43,.55)}
+.phone-body .ui{border-radius:16px}
+
+/* mini dashboard ui */
+.ui{background:var(--white);border-radius:6px;padding:12px;font-size:10px;color:var(--ink-2);overflow:hidden}
+.ui-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
+.ui-head b{font-family:var(--display);font-size:13px;color:var(--ink)}
+.ui-dot{width:7px;height:7px;border-radius:50%;background:var(--emerald);box-shadow:0 0 0 3px var(--emerald-soft)}
+.ui-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:9px}
+.ui-kpi{border:1px solid var(--line);border-radius:6px;padding:6px 7px}
+.ui-kpi em{font-style:normal;display:block;font-size:8.5px;color:var(--muted)}
+.ui-kpi strong{font-family:var(--display);font-size:13px;color:var(--ink);font-variant-numeric:tabular-nums}
+.ui-kpi strong.c{color:var(--coral)}
+.ui-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:8px}
+.ui-card{border:1px solid var(--line);border-radius:6px;padding:7px}
+.ui-bars{display:flex;align-items:flex-end;gap:5px;height:62px}
+.ui-bars i{flex:1;border-radius:3px 3px 0 0;background:var(--emerald);height:0;transition:height .8s cubic-bezier(.2,.8,.2,1)}
+.ui-bars i.o{background:var(--line-2)}
+.ui-bars i.c{background:var(--coral)}
+.ui-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--line)}
+.ui-row:last-child{border:0}
+.ui-row span:last-child{font-weight:700;color:var(--coral)}
+.ui-row span.g{color:var(--emerald)}
+.phone .ui{padding:12px 8px;font-size:9px;aspect-ratio:9/18;display:flex;flex-direction:column;gap:2px}
+.phone .ui-row{font-size:8.5px}
+.phone .ui-kpis{grid-template-columns:1fr}
+.phone .ui-bars{height:46px}
+.replay{position:absolute;left:0;bottom:-6px;font:600 13px var(--body);color:var(--muted);background:none;border:0;cursor:pointer;display:flex;gap:6px;align-items:center;opacity:0;transition:opacity .4s ease 2.6s}
+.stage.go .replay{opacity:1}
+.replay:hover{color:var(--ink)}
+.replay svg{width:15px;height:15px}
+
+/* ---------- sections ---------- */
+section{padding:96px 0}
+.pain{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pain-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:56px;align-items:start}
+.pain-list{display:flex;flex-direction:column}
+.pain-item{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:22px 0;border-top:1px solid var(--line)}
+.pain-item:first-child{border-top:0;padding-top:4px}
+.pain-item svg{width:28px;height:28px;color:var(--coral)}
+.pain-item h3{font-size:21px;margin-bottom:4px}
+.pain-item p{color:var(--ink-2)}
+
+/* demo */
+.demo-intro{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.app{margin-top:36px;background:var(--white);border:1px solid var(--line);border-radius:22px;box-shadow:0 30px 60px -38px rgba(15,26,43,.4);overflow:hidden}
+.app-bar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line)}
+.app-bar h3{font-size:19px}
+.app-bar small{display:block;color:var(--muted);font:500 13.5px var(--body);letter-spacing:0}
+.seg{display:flex;background:var(--paper);border-radius:999px;padding:4px;gap:2px;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.seg::-webkit-scrollbar{display:none}
+.seg button{flex:0 0 auto;font:600 14px var(--body);border:0;background:none;color:var(--muted);padding:8px 14px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.app-body{padding:22px;display:grid;gap:18px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kpi{padding:16px 18px;border-radius:14px;background:var(--paper)}
+.kpi span{display:block;font-size:14px;color:var(--muted);font-weight:500}
+.kpi b{display:block;font-family:var(--display);font-size:clamp(22px,2.4vw,30px);letter-spacing:-.02em;margin-top:2px;font-variant-numeric:tabular-nums}
+.kpi b.c{color:var(--coral)} .kpi b.g{color:var(--emerald)}
+.kpi .trk{height:6px;background:var(--line);border-radius:9px;margin-top:10px;overflow:hidden}
+.kpi .trk i{display:block;height:100%;width:0;background:var(--emerald);border-radius:9px;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.kpi .trk i.c{background:var(--coral)}
+.row2{display:grid;grid-template-columns:1.35fr 1fr;gap:18px}
+.box{border:1px solid var(--line);border-radius:14px;padding:18px}
+.box-h{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.box-h h4{font:700 16px var(--body)}
+.lg{display:flex;gap:14px;font-size:13px;color:var(--muted)}
+.lg i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+#line{width:100%;height:auto;display:block;overflow:visible}
+.bars{display:flex;flex-direction:column;gap:13px}
+.bar .l{display:flex;justify-content:space-between;font-size:14px;margin-bottom:5px;gap:10px}
+.bar .l span{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar .t{position:relative;height:10px;background:var(--paper);border-radius:9px}
+.bar .t .o{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);border-radius:2px;transition:left .6s}
+.bar .t .r{height:100%;border-radius:9px;background:var(--emerald);width:0;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.bar .t .r.c{background:var(--coral)}
+.alerts{list-style:none}
+.alerts li{border-top:1px solid var(--line)}
+.alerts li:first-child{border-top:0}
+.alerts button{width:100%;display:grid;grid-template-columns:1fr auto 18px;gap:12px;align-items:center;text-align:left;font:500 15px var(--body);color:var(--ink);background:none;border:0;padding:13px 2px;cursor:pointer}
+.alerts .v{font-weight:700;color:var(--coral);font-variant-numeric:tabular-nums}
+.alerts .v small{display:block;font-weight:500;font-size:12.5px;text-align:right;color:var(--muted)}
+.alerts svg{width:18px;height:18px;color:var(--muted);transition:transform .25s}
+.alerts li.open svg{transform:rotate(180deg)}
+.alerts .why{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.alerts li.open .why{grid-template-rows:1fr}
+.alerts .why div{overflow:hidden}
+.alerts .why p{margin:0 2px 14px;padding:10px 12px;background:var(--coral-soft);border-radius:10px;font-size:14px;color:var(--ink-2)}
+.alerts .ok{padding:14px 2px;color:var(--emerald);font-weight:600}
+.app-foot{padding:0 22px 20px;font-size:13.5px;color:var(--muted)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:44px;border-top:2px solid var(--ink)}
+.step{padding:24px 26px 0 0}
+.step+.step{padding-left:26px;border-left:1px solid var(--line-2)}
+.step .n{font-family:var(--display);font-weight:800;font-size:44px;color:var(--emerald);line-height:1}
+.step h3{font-size:22px;margin:14px 0 6px}
+.step p{color:var(--ink-2)}
+
+/* partner */
+.partner{background:var(--ink);color:#fff;border-radius:28px;padding:64px 56px;display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+.partner h2{color:#fff}
+.partner .sub{color:#B9C3D0}
+.partner .btn{background:#fff;color:var(--ink);margin-top:30px}
+.partner .btn:hover{background:#E6ECF2}
+.perks{list-style:none;display:grid;gap:2px}
+.perks li{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:17px}
+.perks li:last-child{border:0}
+.perks svg{flex:0 0 22px;width:22px;height:22px;color:#5FD3A6;margin-top:2px}
+
+/* about */
+.about{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:start;max-width:860px}
+.mono-av{width:96px;height:96px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:32px}
+.skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.skills span{font-size:14px;font-weight:600;padding:7px 13px;border-radius:999px;background:var(--white);border:1px solid var(--line)}
+
+/* contact */
+.cta{text-align:center;padding:110px 0 120px;background:var(--white);border-top:1px solid var(--line)}
+.cta h2{margin:0 auto;max-width:16ch;font-size:clamp(34px,5vw,58px)}
+.cta .sub{margin:16px auto 0}
+.cta .hero-ctas{justify-content:center}
+footer{padding:26px 0;font-size:14px;color:var(--muted);text-align:center}
+
+/* reveal on scroll, used once per block */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:28px;padding-top:20px}
+  .phone .ui-kpi strong{font-size:9.5px;white-space:nowrap}
+  .phone .ui-kpi em{font-size:7.5px}
+  .stage{max-width:560px;margin:0 auto}
+  .pain-grid,.row2,.partner{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:1fr;border-top:0}
+  .step,.step+.step{padding:22px 0;border-left:0;border-top:2px solid var(--ink)}
+  .partner{padding:44px 24px;gap:28px}
+  .nav-links a:not(.btn){display:none}
+  section{padding:72px 0}
+}
+@media (max-width:480px){
+  .about{grid-template-columns:1fr;gap:20px}
+  .app-body,.app-bar{padding:16px}
+  .box{padding:14px}
+  .proof{gap:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap nav">
+  <a href="#topo" class="brand" aria-label="Controle Absoluto, início">
+    <svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="9" fill="#0F1A2B"/><path d="M9 22v-6M16 22V10M23 22v-9" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="23" cy="9" r="2.4" fill="#5FD3A6"/></svg>
+    Controle Absoluto
+  </a>
+  <nav class="nav-links" aria-label="Seções">
+    <a href="#demo">Demonstração</a>
+    <a href="#contador">Para contadores</a>
+    <a class="btn btn-dark btn-sm" href="https://wa.me/5534996926970?text=Ol%C3%A1%20Marcelo%2C%20vi%20o%20site%20do%20Controle%20Absoluto%20e%20quero%20saber%20mais." target="_blank" rel="noopener">Falar comigo</a>
+  </nav>
+</header>
+
+<main id="topo">
+<div class="wrap hero">
+  <div>
+    <h1>Controle absoluto do orçamento da sua empresa.</h1>
+    <p class="sub">Junte as planilhas de cada área em um painel só. Veja o que estourou, quanto e por quê, no computador ou no celular.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-dark" href="#demo">Testar a demonstração</a>
+      <a class="btn btn-line" href="https://wa.me/5534996926970?text=Ol%C3%A1%20Marcelo%2C%20quero%20ver%20o%20painel%20com%20os%20n%C3%BAmeros%20da%20minha%20empresa." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+        Chamar no WhatsApp
+      </a>
+    </div>
+    <div class="proof">
+      <div><b>1 tela</b>no lugar de várias planilhas</div>
+      <div><b>Todo mês</b>atualizado com os seus números</div>
+      <div><b>0 sistema</b>novo pra sua equipe aprender</div>
+    </div>
+  </div>
+
+  <div class="stage" id="stage" aria-label="Animação: planilhas se juntando e virando um painel no computador e no celular" role="img">
+    <div class="sheet s1"><div class="sheet-top"><i></i>Financeiro.xlsx</div><div class="cells" data-sheet="0"></div></div>
+    <div class="sheet s2"><div class="sheet-top"><i></i>Compras.xlsx</div><div class="cells" data-sheet="1"></div></div>
+    <div class="sheet s3"><div class="sheet-top"><i></i>Operação.xlsx</div><div class="cells" data-sheet="2"></div></div>
+
+    <div class="laptop">
+      <div class="screen">
+        <div class="ui">
+          <div class="ui-head"><b>Orçado x Realizado</b><span class="ui-dot"></span></div>
+          <div class="ui-kpis">
+            <div class="ui-kpi"><em>Orçado</em><strong>R$ 86 mil</strong></div>
+            <div class="ui-kpi"><em>Realizado</em><strong>R$ 92 mil</strong></div>
+            <div class="ui-kpi"><em>Estouro</em><strong class="c">+7,0%</strong></div>
+          </div>
+          <div class="ui-grid">
+            <div class="ui-card"><div class="ui-bars" data-bars></div></div>
+            <div class="ui-card">
+              <div class="ui-row"><span>Manutenção</span><span>+48%</span></div>
+              <div class="ui-row"><span>Marketing</span><span>+40%</span></div>
+              <div class="ui-row"><span>Energia</span><span>+17%</span></div>
+              <div class="ui-row"><span>Terceiros</span><span class="g">-8%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="base"></div>
+    </div>
+
+    <div class="phone">
+      <div class="phone-body">
+        <div class="ui">
+          <div class="ui-head"><b>Maio</b><span class="ui-dot"></span></div>
+          <div class="ui-kpis">
+            <div class="ui-kpi"><em>Estouro do mês</em><strong class="c">+R$ 6,1 mil</strong></div>
+          </div>
+          <div class="ui-card"><div class="ui-bars" data-bars></div></div>
+          <div class="ui-card" style="margin-top:6px">
+            <div class="ui-row"><span>Manutenção</span><span>+48%</span></div>
+            <div class="ui-row"><span>Marketing</span><span>+40%</span></div>
+            <div class="ui-row"><span>Energia</span><span>+17%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="replay" id="replay" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Ver de novo</button>
+  </div>
+</div>
+
+<section class="pain">
+  <div class="wrap pain-grid">
+    <div class="rv">
+      <h2>O orçamento é feito em janeiro e esquecido em março.</h2>
+      <p class="sub">Quando alguém percebe o estouro, o dinheiro já saiu do caixa.</p>
+    </div>
+    <div class="pain-list rv">
+      <div class="pain-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg>
+        <div><h3>Uma planilha por área</h3><p>Cada setor manda o seu arquivo, em formatos diferentes, e alguém perde horas juntando no fim do mês.</p></div>
+      </div>
+      <div class="pain-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <div><h3>O estouro aparece tarde</h3><p>Energia, manutenção e terceiros passam do planejado e ninguém vê até o caixa sentir.</p></div>
+      </div>
+      <div class="pain-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div><h3>O número não tem explicação</h3><p>Sem justificativa, não dá pra saber se foi um gasto pontual ou um problema que vai voltar.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <div class="demo-intro rv">
+      <div>
+        <h2>Teste o painel aqui mesmo</h2>
+        <p class="sub">Uma empresa exemplo, com números fictícios. Troque o mês e toque em uma conta estourada pra ver a explicação.</p>
+      </div>
+    </div>
+
+    <div class="app rv">
+      <div class="app-bar">
+        <h3>Comercial Exemplo Ltda<small>Orçado x Realizado em 2026</small></h3>
+        <div class="seg" id="seg" role="group" aria-label="Escolher período"></div>
+      </div>
+      <div class="app-body">
+        <div class="kpis">
+          <div class="kpi"><span>Orçado</span><b id="kO">R$ 0</b></div>
+          <div class="kpi"><span>Realizado</span><b id="kR">R$ 0</b></div>
+          <div class="kpi"><span>Diferença</span><b id="kD">R$ 0</b></div>
+          <div class="kpi"><span>Do orçamento usado</span><b id="kE">0%</b><div class="trk"><i id="kT"></i></div></div>
+        </div>
+        <div class="row2">
+          <div class="box">
+            <div class="box-h"><h4>Mês a mês</h4><div class="lg"><span><i style="background:var(--line-2)"></i>Orçado</span><span><i style="background:var(--emerald)"></i>Realizado</span></div></div>
+            <svg id="line" viewBox="0 0 520 220" role="img" aria-label="Gráfico de linha com orçado e realizado de janeiro a junho"></svg>
+          </div>
+          <div class="box">
+            <div class="box-h"><h4>Contas que estouraram</h4></div>
+            <ul class="alerts" id="alerts"></ul>
+          </div>
+        </div>
+        <div class="box">
+          <div class="box-h"><h4>Maiores contas</h4><div class="lg"><span><i style="background:var(--ink);width:3px;height:12px"></i>Orçado</span><span><i style="background:var(--emerald)"></i>Dentro</span><span><i style="background:var(--coral)"></i>Acima</span></div></div>
+          <div class="bars" id="bars"></div>
+        </div>
+      </div>
+      <p class="app-foot">Na versão real, os dados vêm das planilhas ou do sistema da sua empresa e são atualizados todo mês.</p>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:20px">
+  <div class="wrap">
+    <h2 class="rv">Como funciona</h2>
+    <div class="steps rv">
+      <div class="step"><div class="n">1</div><h3>Você manda o que já tem</h3><p>A planilha de orçamento e o relatório de despesas do sistema ou do contador.</p></div>
+      <div class="step"><div class="n">2</div><h3>Eu monto o seu painel</h3><p>Organizo as contas, padronizo os dados e deixo tudo com a cara da sua empresa.</p></div>
+      <div class="step"><div class="n">3</div><h3>Você acompanha de qualquer lugar</h3><p>Todo mês o painel é atualizado, com os estouros e a justificativa de cada área.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contador" style="padding-top:20px">
+  <div class="wrap">
+    <div class="partner rv">
+      <div>
+        <h2>Para escritórios de contabilidade</h2>
+        <p class="sub">Ofereça gestão aos seus clientes sem contratar ninguém e sem comprar sistema. Você indica, eu entrego e dou o suporte.</p>
+        <a class="btn" href="https://wa.me/5534996926970?text=Ol%C3%A1%20Marcelo%2C%20sou%20contador%20e%20quero%20conversar%20sobre%20a%20parceria." target="_blank" rel="noopener">Conversar sobre parceria</a>
+      </div>
+      <ul class="perks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Comissão todo mês por cliente ativo</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Um serviço a mais que segura o cliente no escritório</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Usa os dados que você já tem em mãos</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Sem custo pra começar</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap about rv">
+    <div class="mono-av" aria-hidden="true">MP</div>
+    <div>
+      <h2>Quem faz</h2>
+      <p class="sub">Sou Marcelo Parreira, de Iturama/MG. Trabalho com compras, SAP e indicadores na indústria sucroenergética, e construo painéis que as pessoas usam de verdade no dia a dia. Este painel nasceu de um projeto real com o setor administrativo de um grupo do setor.</p>
+      <div class="skills"><span>Power BI</span><span>SAP MM</span><span>Python</span><span>Google Apps Script</span><span>Lean Six Sigma Yellow Belt</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap rv">
+    <h2>Quer ver com os números da sua empresa?</h2>
+    <p class="sub">Me chama no WhatsApp. Em uma conversa rápida eu mostro como ficaria o seu painel.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-dark" href="https://wa.me/5534996926970?text=Ol%C3%A1%20Marcelo%2C%20quero%20ver%20o%20painel%20com%20os%20n%C3%BAmeros%20da%20minha%20empresa." target="_blank" rel="noopener">(34) 99692-6970</a>
+      <a class="btn btn-line" href="mailto:j.marcelogomesparreira@gmail.com">Mandar e-mail</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>© 2026 Marcelo Parreira, Iturama/MG. Os números da demonstração são fictícios.</footer>
+
+<script>
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var brl=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+
+  /* ---------- hero animation ---------- */
+  var sheetData=[
+    [['Conta','Orç.','Real.'],['Folha','42.000','42.420'],['Encargos','15.200','15.656'],['Aluguel','8.500','9.265'],['Tarifas','650','670'],['Impostos','7.800','7.950']],
+    [['Item','Orç.','Real.'],['Material','900','1.008'],['Combustível','4.800','5.376'],['Peças','1.400','2.072'],['Embalagem','2.100','2.010'],['Frete','1.900','2.240']],
+    [['Área','Orç.','Real.'],['Energia','3.200','3.744'],['Manutenção','2.600','3.848'],['Marketing','3.000','4.200'],['Terceiros','5.400','4.968'],['Limpeza','700','690']]
+  ];
+  document.querySelectorAll('.cells').forEach(function(el){
+    var d=sheetData[+el.dataset.sheet],h='';
+    d.forEach(function(r,i){r.forEach(function(c,j){h+='<span class="'+(i===0?'h':'')+(j>0?' r':'')+'">'+c+'</span>'})});
+    el.innerHTML=h;
+  });
+  var heights=[[55,58],[62,60],[48,62],[70,74],[66,90],[58,52]];
+  document.querySelectorAll('[data-bars]').forEach(function(el){
+    var h='';heights.forEach(function(p){h+='<i class="o" data-h="'+p[0]+'"></i><i class="'+(p[1]>p[0]*1.08?'c':'')+'" data-h="'+p[1]+'"></i>'});
+    el.innerHTML=h;
+  });
+  var stage=document.getElementById('stage');
+  function growBars(on){
+    stage.querySelectorAll('[data-bars] i').forEach(function(b){b.style.height=on?b.dataset.h+'%':'0'});
+  }
+  function play(){
+    stage.classList.remove('go');growBars(false);
+    void stage.offsetWidth;
+    setTimeout(function(){stage.classList.add('go')},reduce?0:500);
+    setTimeout(function(){growBars(true)},reduce?0:1700);
+  }
+  document.getElementById('replay').onclick=play;
+  play();
+
+  /* ---------- demo data ---------- */
+  var contas=[
+    {n:'Folha de pagamento',b:42000,j:'Horas extras no fechamento do trimestre.'},
+    {n:'Encargos sociais',b:15200,j:'Acompanhou as horas extras da folha.'},
+    {n:'Aluguel',b:8500,j:'Reajuste anual do contrato pelo IGP-M a partir de abril.'},
+    {n:'Serviços de terceiros',b:5400,j:'Consultoria tributária contratada no mês.'},
+    {n:'Combustível',b:4800,j:'Rotas extras de entrega para atender um cliente novo.'},
+    {n:'Energia elétrica',b:3200,j:'Bandeira tarifária vermelha e calor acima da média.'},
+    {n:'Marketing',b:3000,j:'Campanha de Dia das Mães antecipada.'},
+    {n:'Manutenção',b:2600,j:'Conserto não previsto do compressor da câmara fria.'},
+    {n:'Material de escritório',b:900,j:'Compra antecipada de estoque para o semestre.'},
+    {n:'Tarifas bancárias',b:650,j:'Mais boletos emitidos com o aumento das vendas.'}
+  ];
+  var meses=['Jan','Fev','Mar','Abr','Mai','Jun'];
+  var dev=[
+    [ 1,-2, 0, 0, 3,-6,-20,-12,-15, 4],
+    [ 2, 3, 0,-5,-3, 4,-10, 18,  8, 6],
+    [ 6, 7, 0,32, 9,14, 25, -8,-30, 2],
+    [-1, 0, 9, 0, 4,22,-15,  3,  5, 9],
+    [ 1, 3, 9,-8,12,17, 40, 48, 12, 3],
+    [ 0, 1, 9,15,16, 6,-35,-20, 30,11]
+  ];
+  var sel=meses.length;
+
+  function calc(m){
+    var ms=m===meses.length?[0,1,2,3,4,5]:[m];
+    return contas.map(function(c,i){
+      var o=0,r=0;ms.forEach(function(k){o+=c.b;r+=Math.round(c.b*(1+dev[k][i]/100))});
+      return {n:c.n,j:c.j,o:o,r:r,d:r-o,p:(r-o)/o*100};
+    });
+  }
+  function monthTotals(){
+    return meses.map(function(_,k){
+      var o=0,r=0;contas.forEach(function(c,i){o+=c.b;r+=Math.round(c.b*(1+dev[k][i]/100))});
+      return {o:o,r:r};
+    });
+  }
+  function pct(v){return (v>0?'+':'')+v.toFixed(1).replace('.',',')+'%'}
+
+  function count(el,to,fmt){
+    if(reduce){el.textContent=fmt(to);return}
+    var from=+(el.dataset.v||0),t0=performance.now(),dur=650;
+    el.dataset.v=to;
+    (function step(t){
+      var k=Math.min((t-t0)/dur,1),e=1-Math.pow(1-k,3);
+      el.textContent=fmt(from+(to-from)*e);
+      if(k<1)requestAnimationFrame(step);
+    })(t0);
+  }
+
+  function seg(){
+    var s=document.getElementById('seg');
+    s.innerHTML=meses.concat(['Semestre']).map(function(l,i){
+      return '<button type="button" aria-pressed="'+(i===sel)+'" data-i="'+i+'">'+l+'</button>';
+    }).join('');
+    s.onclick=function(e){var b=e.target.closest('button');if(!b)return;sel=+b.dataset.i;seg();render()};
+  }
+
+  function drawLine(){
+    var svg=document.getElementById('line'),t=monthTotals();
+    var W=520,H=220,pl=46,pr=12,pt=14,pb=30;
+    var all=[];t.forEach(function(x){all.push(x.o,x.r)});
+    var mn=Math.floor(Math.min.apply(null,all)*0.94/5000)*5000,mx=Math.ceil(Math.max.apply(null,all)*1.02/5000)*5000;
+    var X=function(i){return pl+i*(W-pl-pr)/(t.length-1)},Y=function(v){return pt+(H-pt-pb)*(1-(v-mn)/(mx-mn))};
+    var g='';
+    for(var v=mn;v<=mx;v+=5000){g+='<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#E2E7ED"/><text x="'+(pl-8)+'" y="'+(Y(v)+4)+'" text-anchor="end" font-size="11" fill="#6B7684">'+(v/1000)+' mil</text>'}
+    meses.forEach(function(m,i){g+='<text x="'+X(i)+'" y="'+(H-8)+'" text-anchor="middle" font-size="12" fill="'+(sel===i?'#0F1A2B':'#6B7684')+'" font-weight="'+(sel===i?700:500)+'">'+m+'</text>'});
+    if(sel<meses.length){g+='<rect x="'+(X(sel)-22)+'" y="'+pt+'" width="44" height="'+(H-pt-pb)+'" rx="8" fill="#F4F6F8"/>'}
+    var po=t.map(function(x,i){return X(i)+','+Y(x.o)}).join(' ');
+    var pr_=t.map(function(x,i){return X(i)+','+Y(x.r)}).join(' ');
+    var area='M'+X(0)+','+Y(t[0].r)+' '+t.map(function(x,i){return 'L'+X(i)+','+Y(x.r)}).join(' ')+' L'+X(t.length-1)+','+(H-pb)+' L'+X(0)+','+(H-pb)+'Z';
+    g+='<path d="'+area+'" fill="#0E8A63" opacity=".07"/>';
+    g+='<polyline points="'+po+'" fill="none" stroke="#D3DAE2" stroke-width="2.5" stroke-dasharray="6 5"/>';
+    g+='<polyline id="pl" points="'+pr_+'" fill="none" stroke="#0E8A63" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>';
+    t.forEach(function(x,i){var over=x.r>x.o*1.02;g+='<circle cx="'+X(i)+'" cy="'+Y(x.r)+'" r="'+(sel===i?6:4.5)+'" fill="'+(over?'#D9482F':'#0E8A63')+'" stroke="#fff" stroke-width="2"/>'});
+    svg.innerHTML=g;
+    var pl_=document.getElementById('pl');
+    if(!reduce&&!svg.dataset.drawn&&pl_.getTotalLength){
+      var L=pl_.getTotalLength();pl_.style.strokeDasharray=L;pl_.style.strokeDashoffset=L;
+      pl_.getBoundingClientRect();pl_.style.transition='stroke-dashoffset 1.2s ease';pl_.style.strokeDashoffset=0;
+      svg.dataset.drawn=1;
+    }
+  }
+
+  function render(){
+    var d=calc(sel);
+    var O=0,R=0;d.forEach(function(x){O+=x.o;R+=x.r});var D=R-O,E=R/O*100;
+    count(document.getElementById('kO'),O,function(v){return brl.format(v)});
+    count(document.getElementById('kR'),R,function(v){return brl.format(v)});
+    var kd=document.getElementById('kD');kd.className=D>0?'c':'g';
+    count(kd,D,function(v){return (v>0?'+':'')+brl.format(v)});
+    var ke=document.getElementById('kE');ke.className=E>100?'c':'';
+    count(ke,E,function(v){return v.toFixed(1).replace('.',',')+'%'});
+    var kt=document.getElementById('kT');kt.className=E>100?'c':'';kt.style.width=Math.min(E,100)+'%';
+
+    var over=d.filter(function(x){return x.p>3}).sort(function(a,b){return b.d-a.d});
+    var ul=document.getElementById('alerts');
+    ul.innerHTML=over.length?over.slice(0,5).map(function(x,i){
+      return '<li><button type="button" aria-expanded="false"><span>'+x.n+'</span><span class="v">+'+brl.format(x.d)+'<small>'+pct(x.p)+'</small></span>'+
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>'+
+      '<div class="why"><div><p><b>Justificativa:</b> '+x.j+'</p></div></div></li>';
+    }).join(''):'<li class="ok">Nenhuma conta passou do orçado neste período.</li>';
+    ul.onclick=function(e){var b=e.target.closest('button');if(!b)return;var li=b.parentNode,o=li.classList.toggle('open');b.setAttribute('aria-expanded',o)};
+
+    var top=d.slice().sort(function(a,b){return b.o-a.o}).slice(0,6);
+    var mx=Math.max.apply(null,top.map(function(x){return Math.max(x.o,x.r)}))*1.05;
+    var bars=document.getElementById('bars');
+    if(!bars.children.length){bars.innerHTML=top.map(function(){return '<div class="bar"><div class="l"><b></b><span></span></div><div class="t"><div class="r"></div><div class="o"></div></div></div>'}).join('')}
+    top.forEach(function(x,i){
+      var el=bars.children[i];
+      el.querySelector('b').textContent=x.n;
+      el.querySelector('span').textContent=brl.format(x.r)+' de '+brl.format(x.o);
+      var r=el.querySelector('.r');r.className='r'+(x.p>3?' c':'');
+      el.querySelector('.o').style.left=(x.o/mx*100)+'%';
+      requestAnimationFrame(function(){r.style.width=(x.r/mx*100)+'%'});
+    });
+    drawLine();
+  }
+
+  /* ---------- reveal + start demo when visible ---------- */
+  var started=false;
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting)return;
+      e.target.classList.add('in');io.unobserve(e.target);
+      if(!started&&e.target.classList.contains('app')){started=true;render()}
+    });
+  },{threshold:.15}):null;
+  document.querySelectorAll('.rv').forEach(function(el){io?io.observe(el):el.classList.add('in')});
+  seg();
+  if(!io){started=true;render()}
+})();
+</script>
+</body>
+</html>
