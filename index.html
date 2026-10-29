@@ -4,7 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Controle Absoluto | Painel Orçado x Realizado</title>
-<meta name="description" content="Junte as planilhas de cada área em um painel só. Veja o que estourou, quanto e por quê, no computador ou no celular.">
+<meta name="description" content="Junte as planilhas de cada área em um painel só e veja, no celular, o que passou do orçado, quanto e por quê. Prévia grátis com os seus números.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Controle absoluto do orçamento da sua empresa">
+<meta property="og:description" content="Junte as planilhas de cada área em um painel só. Peça uma prévia grátis com os seus números.">
+<meta property="og:image" content="https://jmarcelogomesparreira-ship-it.github.io/controle-absoluto/og.png">
+<meta property="og:url" content="https://jmarcelogomesparreira-ship-it.github.io/controle-absoluto/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F4F6F8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230F1A2B'/%3E%3Cpath d='M9 22v-6M16 22V10M23 22v-9' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='23' cy='9' r='2.4' fill='%235FD3A6'/%3E%3C/svg%3E">
+<!-- Pixel da Meta: quando criar o seu, cole o código aqui. Os botões de WhatsApp já disparam o evento "Contact". -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -44,7 +53,7 @@ h2{font-size:clamp(30px,4.4vw,46px);font-weight:700;max-width:18ch}
 
 /* ---------- hero ---------- */
 .hero{padding:40px 20px 30px;display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:center}
-.hero h1{font-size:clamp(42px,6.4vw,78px);font-weight:800;max-width:11ch}
+.hero h1{font-size:clamp(40px,6vw,74px);font-weight:800;max-width:12.5ch}
 .hero .sub{font-size:clamp(18px,1.6vw,20px)}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 .proof{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:28px;margin-top:38px}
@@ -101,7 +110,6 @@ h2{font-size:clamp(30px,4.4vw,46px);font-weight:700;max-width:18ch}
 .phone .ui-row span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .phone .ui-kpis{grid-template-columns:1fr}
 .phone .ui-bars{height:46px}
-.stage.go .stage.reset *{transition:none!important}
 .stage.fade .laptop,.stage.fade .phone{opacity:0;transition:opacity .6s ease!important}
 
 /* ---------- sections ---------- */
@@ -222,6 +230,111 @@ footer{padding:26px 0;font-size:14px;color:var(--muted);text-align:center}
   *,*::before,*::after{transition:none!important;animation:none!important}
   .rv{opacity:1;transform:none}
 }
+
+/* ---------- v3 additions ---------- */
+.stage.reset *{transition:none!important}
+.btn-wa{background:var(--emerald);color:#fff}
+.btn-wa:hover{background:var(--emerald-2)}
+.btn-light{background:#fff;color:var(--ink);margin-top:30px}
+.btn-light:hover{background:#E6ECF2}
+.btn-light svg{color:var(--emerald)}
+.btn-lg{min-height:54px;padding:15px 26px;font-size:17px}
+.btn-sm{min-height:44px}
+.nav .btn-wa{color:#fff}
+.assure{display:flex;align-items:center;gap:8px;margin-top:16px;font-size:15px;color:var(--muted)}
+.assure svg{width:18px;height:18px;color:var(--emerald)}
+
+.facts{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-2);margin:24px 0 72px}
+.facts li{padding:22px 24px 0 0}
+.facts li+li{padding-left:24px;border-left:1px solid var(--line-2)}
+.facts b{display:block;font-family:var(--display);font-size:clamp(22px,2.4vw,28px);letter-spacing:-.02em;line-height:1.1}
+.facts span{display:block;color:var(--muted);font-size:15px;margin-top:4px;max-width:24ch}
+
+.mid-cta{margin-top:28px;display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between;padding:22px 26px;border-radius:18px;background:var(--emerald-soft)}
+.mid-cta p{font-family:var(--display);font-weight:700;font-size:clamp(19px,2vw,23px);letter-spacing:-.015em}
+
+.case{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.case-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:56px;align-items:start}
+.case-story{display:grid;gap:14px}
+.cs-row{display:grid;grid-template-columns:92px 1fr;gap:18px;align-items:start;padding:22px;border-radius:16px;background:var(--paper)}
+.cs-row p{color:var(--ink-2)}
+.cs-tag{font-weight:700;font-size:14px;text-align:center;padding:6px 0;border-radius:999px;background:var(--coral-soft);color:var(--coral)}
+.cs-tag.ok{background:var(--emerald-soft);color:var(--emerald-2)}
+
+section.tight{padding-top:0}
+.partner .btn-light{margin-top:30px}
+
+.folio{background:var(--white);border-top:1px solid var(--line)}
+.folio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:40px}
+.fcard{display:flex;flex-direction:column;text-align:left;font:inherit;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;padding:0;cursor:pointer;transition:border-color .2s}
+.fcard:hover{border-color:var(--ink)}
+.fcard[disabled]{cursor:default}
+.fcard[disabled]:hover{border-color:var(--line)}
+.fthumb{position:relative;aspect-ratio:16/8;background:var(--ink);overflow:hidden}
+.fthumb svg{position:absolute;inset:0;width:100%;height:100%}
+.fbody{padding:20px 22px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+.fhead{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.fhead h3{font-size:22px}
+.fbadge{flex:0 0 auto;font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--emerald-soft);color:var(--emerald-2)}
+.fbadge.soon{background:var(--navy-soft);color:var(--muted)}
+.fbody p{color:var(--ink-2);font-size:16px}
+.fgo{margin-top:auto;padding-top:12px;font-weight:700;font-size:15px;color:var(--emerald-2);display:flex;align-items:center;gap:6px}
+.fgo svg{width:16px;height:16px}
+.fcard[disabled] .fgo{color:var(--muted)}
+
+.role{font-weight:700;color:var(--emerald-2);margin-top:8px}
+
+.faq-wrap{display:grid;grid-template-columns:1fr 1.6fr;gap:56px;align-items:start}
+.faq details{border-bottom:1px solid var(--line-2)}
+.faq details:first-child{border-top:1px solid var(--line-2)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 2px;font-weight:700;font-size:18px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary svg{flex:0 0 20px;width:20px;height:20px;color:var(--muted);transition:transform .25s}
+.faq details[open] summary svg{transform:rotate(180deg)}
+.faq details p{padding:0 2px 22px;color:var(--ink-2);max-width:60ch}
+
+.cta h2{max-width:20ch}
+
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .3s ease;display:none}
+.sticky .btn{width:100%;min-height:52px}
+.sticky.show{transform:none}
+
+.modal{position:fixed;inset:0;z-index:50;background:rgba(15,26,43,.72);display:flex;align-items:center;justify-content:center;padding:24px}
+.modal[hidden]{display:none}
+.m-box{width:min(1280px,100%);height:min(86vh,860px);background:#fff;border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.m-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 12px 10px 20px;border-bottom:1px solid var(--line)}
+.m-bar b{font-family:var(--display);font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m-actions{display:flex;align-items:center;gap:6px;flex:0 0 auto}
+.m-link{font-weight:600;font-size:14.5px;color:var(--emerald-2);padding:10px 12px}
+.m-close{width:44px;height:44px;border-radius:12px;border:0;background:var(--paper);cursor:pointer;display:grid;place-items:center;color:var(--ink)}
+.m-close svg{width:20px;height:20px}
+.modal iframe{flex:1;width:100%;border:0;background:var(--paper)}
+
+@media (max-width:900px){
+  .facts{grid-template-columns:1fr;border-top:0;margin-bottom:48px}
+  .facts li,.facts li+li{padding:14px 0;border-left:0;border-top:1px solid var(--line-2)}
+  .case-grid,.faq-wrap{grid-template-columns:1fr;gap:28px}
+  .folio-grid{grid-template-columns:1fr}
+  .sticky{display:block}
+  footer{padding-bottom:96px}
+  .modal{padding:0}
+  .m-box{height:100%;border-radius:0}
+}
+@media (max-width:480px){
+  .hero-ctas .btn{width:100%}
+  .cs-row{grid-template-columns:1fr;gap:10px;padding:18px}
+  .cs-tag{justify-self:start;padding:5px 14px}
+  .mid-cta .btn{width:100%}
+  .nav .btn-sm{padding:10px 14px}
+}
+@media (max-width:480px){
+  .brand{font-size:17px;gap:8px}
+  .brand svg{width:26px;height:26px}
+  .nav .btn-sm{padding:9px 13px;font-size:14px;gap:6px}
+  .nav .btn-sm svg{width:16px;height:16px}
+  .phone{width:30%}
+  .phone .ui-kpi strong{font-size:10px}
+}
 </style>
 </head>
 <body>
@@ -231,37 +344,25 @@ footer{padding:26px 0;font-size:14px;color:var(--muted);text-align:center}
     <svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="9" fill="#0F1A2B"/><path d="M9 22v-6M16 22V10M23 22v-9" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="23" cy="9" r="2.4" fill="#5FD3A6"/></svg>
     Controle Absoluto
   </a>
-  <nav class="nav-links" aria-label="Seções">
-    <a href="#demo">Demonstração</a>
-    <a href="#contador">Para contadores</a>
-    <a class="btn btn-dark btn-sm" href="https://wa.me/5534996926970?text=Ol%C3%A1%20Marcelo%2C%20vi%20o%20site%20do%20Controle%20Absoluto%20e%20quero%20saber%20mais." target="_blank" rel="noopener">Falar comigo</a>
-  </nav>
+  <a class="btn btn-wa btn-sm" data-wa="topo" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>Fale comigo</a>
 </header>
 
 <main id="topo">
 <div class="wrap hero">
   <div>
     <h1>Controle absoluto do orçamento da sua empresa.</h1>
-    <p class="sub">Junte as planilhas de cada área em um painel só. Veja o que estourou, quanto e por quê, no computador ou no celular.</p>
+    <p class="sub">Junte as planilhas de cada área em um painel só e veja, no celular, o que passou do orçado, quanto e por quê.</p>
     <div class="hero-ctas">
-      <a class="btn btn-dark" href="#demo">Testar a demonstração</a>
-      <a class="btn btn-line" href="https://wa.me/5534996926970?text=Ol%C3%A1%20Marcelo%2C%20quero%20ver%20o%20painel%20com%20os%20n%C3%BAmeros%20da%20minha%20empresa." target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
-        Chamar no WhatsApp
-      </a>
+      <a class="btn btn-wa btn-lg" data-wa="hero" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>Quero uma prévia grátis</a>
+      <a class="btn btn-line btn-lg" href="#demo">Testar o painel</a>
     </div>
-    <div class="proof">
-      <div><b>1 tela</b>no lugar de várias planilhas</div>
-      <div><b>Todo mês</b>atualizado com os seus números</div>
-      <div><b>0 sistema</b>novo pra sua equipe aprender</div>
-    </div>
+    <p class="assure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Sem compromisso. Você não instala nada.</p>
   </div>
 
   <div class="stage" id="stage" aria-label="Animação: planilhas se juntando e virando um painel no computador e no celular" role="img">
     <div class="sheet s1"><div class="sheet-top"><i></i>Financeiro.xlsx</div><div class="cells" data-sheet="0"></div></div>
     <div class="sheet s2"><div class="sheet-top"><i></i>Compras.xlsx</div><div class="cells" data-sheet="1"></div></div>
     <div class="sheet s3"><div class="sheet-top"><i></i>Operação.xlsx</div><div class="cells" data-sheet="2"></div></div>
-
     <div class="laptop">
       <div class="screen">
         <div class="ui">
@@ -269,7 +370,7 @@ footer{padding:26px 0;font-size:14px;color:var(--muted);text-align:center}
           <div class="ui-kpis">
             <div class="ui-kpi"><em>Orçado</em><strong>R$ 86 mil</strong></div>
             <div class="ui-kpi"><em>Realizado</em><strong>R$ 92 mil</strong></div>
-            <div class="ui-kpi"><em>Estouro</em><strong class="c">+7,0%</strong></div>
+            <div class="ui-kpi"><em>Acima do orçado</em><strong class="c">+7,0%</strong></div>
           </div>
           <div class="ui-grid">
             <div class="ui-card"><div class="ui-bars" data-bars></div></div>
@@ -284,40 +385,44 @@ footer{padding:26px 0;font-size:14px;color:var(--muted);text-align:center}
       </div>
       <div class="base"></div>
     </div>
-
     <div class="phone">
       <div class="phone-body">
         <div class="ui">
           <div class="ui-head"><b>Maio</b><span class="ui-dot"></span></div>
-          <div class="ui-kpis">
-            <div class="ui-kpi"><em>Estouro do mês</em><strong class="c">+R$ 6,1 mil</strong></div>
-          </div>
+          <div class="ui-kpis"><div class="ui-kpi"><em>Acima do orçado</em><strong class="c">+R$ 6,1 mil</strong></div></div>
           <div class="ui-card"><div class="ui-bars" data-bars></div></div>
         </div>
       </div>
     </div>
-
   </div>
+</div>
+
+<div class="wrap">
+  <ul class="facts">
+    <li><b>1 tela</b><span>no lugar das planilhas de cada área</span></li>
+    <li><b>Todo mês</b><span>atualizado com os números da sua empresa</span></li>
+    <li><b>Celular ou PC</b><span>abre em qualquer lugar, sem instalar nada</span></li>
+  </ul>
 </div>
 
 <section class="pain">
   <div class="wrap pain-grid">
     <div class="rv">
       <h2>O orçamento é feito em janeiro e esquecido em março.</h2>
-      <p class="sub">Quando alguém percebe o estouro, o dinheiro já saiu do caixa.</p>
+      <p class="sub">Quando alguém percebe que uma despesa passou do combinado, o dinheiro já saiu do caixa.</p>
     </div>
     <div class="pain-list rv">
       <div class="pain-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg>
-        <div><h3>Uma planilha por área</h3><p>Cada setor manda o seu arquivo, em formatos diferentes, e alguém perde horas juntando no fim do mês.</p></div>
+        <div><h3>Uma planilha por área</h3><p>Cada setor manda o seu arquivo, cada um num formato, e alguém perde horas juntando tudo no fim do mês.</p></div>
       </div>
       <div class="pain-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-        <div><h3>O estouro aparece tarde</h3><p>Energia, manutenção e terceiros passam do planejado e ninguém vê até o caixa sentir.</p></div>
+        <div><h3>O problema aparece tarde</h3><p>Energia, manutenção e terceiros passam do orçado e ninguém vê até o caixa sentir.</p></div>
       </div>
       <div class="pain-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <div><h3>O número não tem explicação</h3><p>Sem justificativa, não dá pra saber se foi um gasto pontual ou um problema que vai voltar.</p></div>
+        <div><h3>O número não tem explicação</h3><p>Sem justificativa, não dá pra saber se foi um gasto pontual ou um problema que vai voltar todo mês.</p></div>
       </div>
     </div>
   </div>
@@ -325,11 +430,9 @@ footer{padding:26px 0;font-size:14px;color:var(--muted);text-align:center}
 
 <section id="demo">
   <div class="wrap">
-    <div class="demo-intro rv">
-      <div>
-        <h2>Teste o painel aqui mesmo</h2>
-        <p class="sub">Uma empresa exemplo, com números fictícios. Troque o mês e toque em uma conta estourada pra ver a explicação.</p>
-      </div>
+    <div class="rv">
+      <h2>Teste o painel agora</h2>
+      <p class="sub">Uma empresa de exemplo, com números fictícios. Troque o mês e toque em uma conta acima do orçado pra ver a explicação.</p>
     </div>
 
     <div class="app rv">
@@ -350,7 +453,7 @@ footer{padding:26px 0;font-size:14px;color:var(--muted);text-align:center}
             <svg id="line" viewBox="0 0 520 220" role="img" aria-label="Gráfico de linha com orçado e realizado de janeiro a junho"></svg>
           </div>
           <div class="box">
-            <div class="box-h"><h4>Contas que estouraram</h4></div>
+            <div class="box-h"><h4>Acima do orçado</h4></div>
             <ul class="alerts" id="alerts"></ul>
           </div>
         </div>
@@ -359,64 +462,123 @@ footer{padding:26px 0;font-size:14px;color:var(--muted);text-align:center}
           <div class="bars" id="bars"></div>
         </div>
       </div>
-      <p class="app-foot">Na versão real, os dados vêm das planilhas ou do sistema da sua empresa e são atualizados todo mês.</p>
+      <p class="app-foot">Na versão da sua empresa, os dados vêm das suas planilhas ou do seu sistema e são atualizados todo mês.</p>
+    </div>
+
+    <div class="mid-cta rv">
+      <p>Quer ver isso com os números da sua empresa?</p>
+      <a class="btn btn-wa" data-wa="demo" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>Quero uma prévia grátis</a>
     </div>
   </div>
 </section>
 
-<section style="padding-top:20px">
+<section class="case">
+  <div class="wrap case-grid">
+    <div class="rv">
+      <h2>Nasceu de um caso real</h2>
+      <p class="sub">O painel foi criado para o setor administrativo de um grupo do setor sucroenergético.</p>
+    </div>
+    <div class="case-story rv">
+      <div class="cs-row"><span class="cs-tag">Antes</span><p>O orçamento chegava de cinco responsáveis, em cinco planilhas diferentes, e era consolidado à mão pra cada reunião.</p></div>
+      <div class="cs-row"><span class="cs-tag ok">Depois</span><p>Uma tela só, com orçado, realizado, diferença e justificativa de cada conta. A planilha de cada responsável passou a ser gerada automaticamente a partir do relatório do sistema.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="como">
   <div class="wrap">
     <h2 class="rv">Como funciona</h2>
     <div class="steps rv">
-      <div class="step"><div class="n">1</div><h3>Você manda o que já tem</h3><p>A planilha de orçamento e o relatório de despesas do sistema ou do contador.</p></div>
-      <div class="step"><div class="n">2</div><h3>Eu monto o seu painel</h3><p>Organizo as contas, padronizo os dados e deixo tudo com a cara da sua empresa.</p></div>
-      <div class="step"><div class="n">3</div><h3>Você acompanha de qualquer lugar</h3><p>Todo mês o painel é atualizado, com os estouros e a justificativa de cada área.</p></div>
+      <div class="step"><div class="n">1</div><h3>Você manda o que já tem</h3><p>A planilha de orçamento e o relatório de despesas de um mês, do sistema ou do seu contador.</p></div>
+      <div class="step"><div class="n">2</div><h3>Eu monto a sua prévia grátis</h3><p>Organizo as contas e te mostro o painel funcionando com os seus números, pelo WhatsApp.</p></div>
+      <div class="step"><div class="n">3</div><h3>Você decide se continua</h3><p>Gostou, o painel passa a ser atualizado todo mês. Não fez sentido, você não paga nada.</p></div>
     </div>
   </div>
 </section>
 
-<section id="contador" style="padding-top:20px">
+<section id="contador" class="tight">
   <div class="wrap">
     <div class="partner rv">
       <div>
         <h2>Para escritórios de contabilidade</h2>
-        <p class="sub">Ofereça gestão aos seus clientes sem contratar ninguém e sem comprar sistema. Você indica, eu entrego e dou o suporte.</p>
-        <a class="btn" href="https://wa.me/5534996926970?text=Ol%C3%A1%20Marcelo%2C%20sou%20contador%20e%20quero%20conversar%20sobre%20a%20parceria." target="_blank" rel="noopener">Conversar sobre parceria</a>
+        <p class="sub">Ofereça gestão aos seus clientes sem contratar ninguém e sem comprar sistema. Você indica, eu monto o painel e dou o suporte.</p>
+        <a class="btn btn-light" data-wa="contador" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>Conversar sobre parceria</a>
       </div>
       <ul class="perks">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Comissão todo mês por cliente ativo</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Um serviço a mais que segura o cliente no escritório</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Usa os dados que você já tem em mãos</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Sem custo pra começar</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Comissão todo mês por cliente ativo</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Um serviço a mais que segura o cliente no escritório</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Usa os dados que você já tem em mãos</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Sem custo pra começar</li>
       </ul>
     </div>
   </div>
 </section>
 
-<section>
+<section id="portfolio" class="folio">
+  <div class="wrap">
+    <div class="rv">
+      <h2>Outros sistemas que eu construo</h2>
+      <p class="sub">Painéis completos para a indústria, cada um pensado para uma área. Toque em um para abrir e usar aqui mesmo.</p>
+    </div>
+    <div class="folio-grid rv" id="folio"></div>
+  </div>
+</section>
+
+<section class="about-sec">
   <div class="wrap about rv">
     <div class="mono-av" aria-hidden="true">MP</div>
     <div>
       <h2>Quem faz</h2>
-      <p class="sub">Sou Marcelo Parreira, de Iturama/MG. Trabalho com compras, SAP e indicadores na indústria sucroenergética, e construo painéis que as pessoas usam de verdade no dia a dia. Este painel nasceu de um projeto real com o setor administrativo de um grupo do setor.</p>
+      <p class="role">Marcelo Parreira, consultor em gestão e indicadores</p>
+      <p class="sub">Sou de Iturama/MG e trabalho com compras, SAP e indicadores na indústria sucroenergética. Construo painéis que as pessoas usam de verdade no dia a dia, do chão de fábrica ao escritório.</p>
       <div class="skills"><span>Power BI</span><span>SAP MM</span><span>Python</span><span>Google Apps Script</span><span>Lean Six Sigma Yellow Belt</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="duvidas">
+  <div class="wrap faq-wrap">
+    <h2 class="rv">Dúvidas comuns</h2>
+    <div class="faq rv">
+      <details><summary>Preciso trocar de sistema ou instalar alguma coisa?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><p>Não. O painel usa as planilhas e os relatórios que a sua empresa já tem. Você abre pelo navegador, no computador ou no celular.</p></details>
+      <details><summary>Funciona com o meu sistema?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><p>Se o seu sistema exporta um relatório em Excel ou CSV, funciona. Se hoje tudo fica em planilha, também funciona.</p></details>
+      <details><summary>Quanto custa?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><p>Depende de quantas áreas e contas a sua empresa tem. A prévia é grátis, e o valor mensal é combinado depois que você vê o painel com os seus números.</p></details>
+      <details><summary>Meus dados ficam seguros?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><p>Os seus números são usados só pra montar o seu painel e não são compartilhados com ninguém.</p></details>
+      <details><summary>Quanto tempo leva?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><p>A prévia fica pronta em poucos dias depois que eu recebo as planilhas. Daí em diante, a atualização é mensal.</p></details>
     </div>
   </div>
 </section>
 
 <section class="cta">
   <div class="wrap rv">
-    <h2>Quer ver com os números da sua empresa?</h2>
-    <p class="sub">Me chama no WhatsApp. Em uma conversa rápida eu mostro como ficaria o seu painel.</p>
+    <h2>Veja o painel da sua empresa antes de pagar qualquer coisa.</h2>
+    <p class="sub">Fale comigo no WhatsApp e me conte como vocês controlam o orçamento hoje.</p>
     <div class="hero-ctas">
-      <a class="btn btn-dark" href="https://wa.me/5534996926970?text=Ol%C3%A1%20Marcelo%2C%20quero%20ver%20o%20painel%20com%20os%20n%C3%BAmeros%20da%20minha%20empresa." target="_blank" rel="noopener">(34) 99692-6970</a>
-      <a class="btn btn-line" href="mailto:j.marcelogomesparreira@gmail.com">Mandar e-mail</a>
+      <a class="btn btn-wa btn-lg" data-wa="final" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>Quero uma prévia grátis</a>
+      <a class="btn btn-line btn-lg" href="mailto:j.marcelogomesparreira@gmail.com">Mandar e-mail</a>
     </div>
   </div>
 </section>
 </main>
 
 <footer>© 2026 Marcelo Parreira, Iturama/MG. Os números da demonstração são fictícios.</footer>
+
+<div class="sticky" id="sticky" aria-hidden="true">
+  <a class="btn btn-wa" data-wa="barra" href="#" tabindex="-1"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>Quero uma prévia grátis</a>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle" hidden>
+  <div class="m-box">
+    <div class="m-bar">
+      <b id="mTitle"></b>
+      <div class="m-actions">
+        <a id="mOpen" class="m-link" href="#" target="_blank" rel="noopener">Abrir em tela cheia</a>
+        <button type="button" class="m-close" id="mClose" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+    </div>
+    <iframe id="mFrame" title="Sistema em execução" loading="lazy"></iframe>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -578,6 +740,82 @@ footer{padding:26px 0;font-size:14px;color:var(--muted);text-align:center}
     });
     drawLine();
   }
+
+
+  /* ---------- WhatsApp links (cada botão manda uma mensagem diferente, pra você saber de onde veio) ---------- */
+  var WA_NUMERO='5534996926970';
+  var WA_MSG={
+    topo:'Olá, Marcelo! Vi o site do Controle Absoluto e quero saber mais.',
+    hero:'Olá, Marcelo! Quero uma prévia grátis do painel com os números da minha empresa.',
+    demo:'Olá, Marcelo! Testei o painel no site e quero ver com os números da minha empresa.',
+    contador:'Olá, Marcelo! Sou contador e quero conversar sobre a parceria.',
+    final:'Olá, Marcelo! Quero uma prévia grátis do painel. Hoje controlamos o orçamento assim: ',
+    barra:'Olá, Marcelo! Quero uma prévia grátis do painel com os números da minha empresa.'
+  };
+  document.querySelectorAll('[data-wa]').forEach(function(a){
+    a.href='https://wa.me/'+WA_NUMERO+'?text='+encodeURIComponent(WA_MSG[a.dataset.wa]||WA_MSG.topo);
+    a.target='_blank';a.rel='noopener';
+    a.addEventListener('click',function(){
+      /* Quando tiver o Pixel da Meta, o evento de lead já sai daqui */
+      try{if(window.fbq)fbq('track','Contact',{content_name:a.dataset.wa})}catch(e){}
+    });
+  });
+
+  /* ---------- barra fixa no celular ---------- */
+  var sticky=document.getElementById('sticky'),heroEl=document.querySelector('.hero'),ctaEl=document.querySelector('.cta');
+  if('IntersectionObserver' in window){
+    var vis={hero:true,cta:false};
+    var so=new IntersectionObserver(function(es){
+      es.forEach(function(e){vis[e.target===heroEl?'hero':'cta']=e.isIntersecting});
+      var on=!vis.hero&&!vis.cta;
+      sticky.classList.toggle('show',on);sticky.setAttribute('aria-hidden',!on);
+      sticky.querySelector('a').tabIndex=on?0:-1;
+    });
+    so.observe(heroEl);so.observe(ctaEl);
+  }
+
+  /* ---------- portfólio ----------
+     Pra colocar um sistema no ar, cole o link do GitHub Pages em "url".
+     Com "url" vazio, o card aparece como "Em breve". */
+  var PORTFOLIO=[
+    {titulo:'Centro de Operações Agrícolas',area:'Agrícola',url:'',
+     texto:'Sala de controle da safra: colheita, frota, manutenção, solo, insumos, clima e custos em uma tela.',thumb:'agro'},
+    {titulo:'Sigma Industrial',area:'Industrial',url:'https://jmarcelogomesparreira-ship-it.github.io/sigma-industrial/',
+     texto:'Moenda, caldeira, fermentação, destilaria e fábrica de açúcar, com indicadores por área e por turno.',thumb:'ind'},
+    {titulo:'Manutenção',area:'Manutenção',url:'',
+     texto:'Ordens de serviço, paradas, disponibilidade dos equipamentos e curva ABC de custos.',thumb:'man'},
+    {titulo:'Frota e Logística',area:'Logística',url:'',
+     texto:'Veículos, consumo de combustível, viagens e custo por quilômetro rodado.',thumb:'frota'}
+  ];
+  var TH={
+    agro:'<rect width="400" height="200" fill="#0F1A2B"/><g stroke="#1F7A45" stroke-width="10" opacity=".55">'+[0,1,2,3,4,5,6,7].map(function(i){return '<path d="M'+(i*60-80)+' 220 L'+(i*60+40)+' -20"/>'}).join('')+'</g><rect x="24" y="24" width="150" height="62" rx="10" fill="#fff" opacity=".95"/><rect x="38" y="40" width="70" height="8" rx="4" fill="#6B7684"/><rect x="38" y="58" width="110" height="14" rx="5" fill="#0E8A63"/><circle cx="300" cy="120" r="44" fill="none" stroke="#5FD3A6" stroke-width="10" stroke-dasharray="200 80" transform="rotate(-90 300 120)"/>',
+    ind:'<rect width="400" height="200" fill="#0F1A2B"/><g fill="#1E2C43"><rect x="40" y="70" width="46" height="110" rx="6"/><rect x="100" y="50" width="46" height="130" rx="6"/><rect x="160" y="90" width="46" height="90" rx="6"/></g><g fill="#5FD3A6"><rect x="40" y="120" width="46" height="60" rx="6"/><rect x="100" y="80" width="46" height="100" rx="6"/></g><rect x="160" y="140" width="46" height="40" rx="6" fill="#D9482F"/><path d="M240 150 C270 60 300 160 330 90 S370 60 380 70" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>',
+    man:'<rect width="400" height="200" fill="#0F1A2B"/><g transform="translate(200 100)"><circle r="54" fill="none" stroke="#1E2C43" stroke-width="22"/><circle r="54" fill="none" stroke="#5FD3A6" stroke-width="22" stroke-dasharray="270 400" transform="rotate(-90)"/><text y="10" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="30" fill="#fff">92%</text></g>',
+    frota:'<rect width="400" height="200" fill="#0F1A2B"/><path d="M30 160 C110 40 180 170 250 80 S360 60 380 40" fill="none" stroke="#1E2C43" stroke-width="14" stroke-linecap="round"/><path d="M30 160 C110 40 180 170 250 80" fill="none" stroke="#5FD3A6" stroke-width="6" stroke-linecap="round" stroke-dasharray="4 12"/><circle cx="250" cy="80" r="11" fill="#fff"/><circle cx="250" cy="80" r="22" fill="#fff" opacity=".18"/>'
+  };
+  var arrow='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  var folio=document.getElementById('folio');
+  folio.innerHTML=PORTFOLIO.map(function(p,i){
+    var on=!!p.url;
+    return '<button type="button" class="fcard" data-i="'+i+'"'+(on?'':' disabled')+'>'+
+      '<div class="fthumb"><svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">'+TH[p.thumb]+'</svg></div>'+
+      '<div class="fbody"><div class="fhead"><h3>'+p.titulo+'</h3><span class="fbadge'+(on?'':' soon')+'">'+(on?p.area:'Em breve')+'</span></div>'+
+      '<p>'+p.texto+'</p><span class="fgo">'+(on?'Abrir o sistema '+arrow:'Em construção')+'</span></div></button>';
+  }).join('');
+
+  var modal=document.getElementById('modal'),frame=document.getElementById('mFrame'),lastFocus=null;
+  function openModal(p){
+    lastFocus=document.activeElement;
+    document.getElementById('mTitle').textContent=p.titulo;
+    document.getElementById('mOpen').href=p.url;
+    frame.src=p.url;modal.hidden=false;document.body.style.overflow='hidden';
+    document.getElementById('mClose').focus();
+  }
+  function closeModal(){modal.hidden=true;frame.src='about:blank';document.body.style.overflow='';if(lastFocus)lastFocus.focus()}
+  folio.onclick=function(e){var c=e.target.closest('.fcard');if(!c||c.disabled)return;openModal(PORTFOLIO[+c.dataset.i])};
+  document.getElementById('mClose').onclick=closeModal;
+  modal.addEventListener('click',function(e){if(e.target===modal)closeModal()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)closeModal()});
 
   /* ---------- reveal + start demo when visible ---------- */
   var started=false;
