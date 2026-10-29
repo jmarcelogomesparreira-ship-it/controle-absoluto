@@ -47,8 +47,8 @@ h2{font-size:clamp(30px,4.4vw,46px);font-weight:700;max-width:18ch}
 .hero h1{font-size:clamp(42px,6.4vw,78px);font-weight:800;max-width:11ch}
 .hero .sub{font-size:clamp(18px,1.6vw,20px)}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.proof{display:flex;gap:28px;margin-top:38px;flex-wrap:wrap}
-.proof div{font-size:14.5px;color:var(--muted);max-width:16ch;line-height:1.35}
+.proof{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:28px;margin-top:38px}
+.proof div{font-size:14.5px;color:var(--muted);max-width:14ch;line-height:1.35}
 .proof b{display:block;font-family:var(--display);font-size:28px;color:var(--ink);letter-spacing:-.02em;margin-bottom:2px}
 
 /* stage: sheets -> dashboard -> devices */
@@ -97,11 +97,14 @@ h2{font-size:clamp(30px,4.4vw,46px);font-weight:700;max-width:18ch}
 .ui-row span:last-child{font-weight:700;color:var(--coral)}
 .ui-row span.g{color:var(--emerald)}
 .phone .ui{padding:12px 8px;font-size:9px;aspect-ratio:9/18;display:flex;flex-direction:column;gap:2px}
-.phone .ui-row{font-size:8.5px}
+.phone .ui-row{font-size:8px;gap:4px}
+.phone .ui-row span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .phone .ui-kpis{grid-template-columns:1fr}
 .phone .ui-bars{height:46px}
 .replay{position:absolute;left:0;bottom:-6px;font:600 13px var(--body);color:var(--muted);background:none;border:0;cursor:pointer;display:flex;gap:6px;align-items:center;opacity:0;transition:opacity .4s ease 2.6s}
 .stage.go .replay{opacity:1}
+.stage.reset *{transition:none!important}
+.stage.fade .laptop,.stage.fade .phone{opacity:0;transition:opacity .6s ease!important}
 .replay:hover{color:var(--ink)}
 .replay svg{width:15px;height:15px}
 
@@ -450,14 +453,23 @@ footer{padding:26px 0;font-size:14px;color:var(--muted);text-align:center}
   function growBars(on){
     stage.querySelectorAll('[data-bars] i').forEach(function(b){b.style.height=on?b.dataset.h+'%':'0'});
   }
-  function play(){
-    stage.classList.remove('go');growBars(false);
+  var timers=[];
+  function later(fn,ms){timers.push(setTimeout(fn,ms))}
+  function start(){
+    stage.classList.add('reset');stage.classList.remove('go','fade');growBars(false);
     void stage.offsetWidth;
-    setTimeout(function(){stage.classList.add('go')},reduce?0:500);
-    setTimeout(function(){growBars(true)},reduce?0:1700);
+    stage.classList.remove('reset');
+    later(function(){stage.classList.add('go')},400);
+    later(function(){growBars(true)},1600);
+    if(!reduce){
+      later(function(){stage.classList.add('fade')},7600);
+      later(start,8300);
+    }
   }
+  function play(){timers.forEach(clearTimeout);timers=[];start()}
   document.getElementById('replay').onclick=play;
-  play();
+  if(reduce){stage.classList.add('go');growBars(true)}else{play()}
+  document.addEventListener('visibilitychange',function(){if(!document.hidden&&!reduce)play()});
 
   /* ---------- demo data ---------- */
   var contas=[
